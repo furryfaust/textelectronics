@@ -1,7 +1,6 @@
 package circuitutils
 
 import (
-    "os"
     "fmt"
     "github.com/furryfaust/textelectronics/component"
 )
@@ -20,9 +19,9 @@ func NewCircuit() Circuit {
     return circuit
 }
 
-func (c Circuit) AddRecognizer(recognizer Recognizer) {
+func (c Circuit) AddRecognizer(recognizer component.Recognizer) {
     recognizers := *c.Recognizers
-    recognizers = append(recognizers, recognizer)
+    *c.Recognizers = append(recognizers, recognizer)
 }
 
 func (c Circuit) Parse(path string) {
