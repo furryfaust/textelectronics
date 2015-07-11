@@ -12,7 +12,7 @@ func (a And2Recognizer) Blueprint() [][]string {
     return a.blueprint
 }
 
-func (a And2Recognizer) NewComponent(id string, x int, y int, width int, height int) Component{
+func (a And2Recognizer) NewComponent(id string, x int, y int, width int, height int, input map[string]string) Component{
     ina, inb, out := 0, 0, 0
     and2com := And2Component {id:id, X:x, Y:y, Width:width, Height:height, InA:&ina, InB:&inb, Out:&out}
     return and2com

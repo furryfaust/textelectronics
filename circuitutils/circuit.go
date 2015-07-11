@@ -25,6 +25,6 @@ func (c Circuit) AddRecognizer(recognizer component.Recognizer) {
 }
 
 func (c Circuit) Parse(path string) {
-
+    
 }
 
