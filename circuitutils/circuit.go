@@ -2,6 +2,7 @@ package circuitutils
 
 import (
     "os"
+    "fmt"
     "bufio"
     "strings"
     "io/ioutil"
@@ -90,12 +91,24 @@ func (c Circuit) Parse(path string) {
         return false, id
     }
 
+    values := make(map[string]string)
+    if len(os.Args) > 2 {
+        for i := 2; i != len(os.Args); i++ {
+            splt := strings.Split(os.Args[i], ":")
+            values[splt[0]] = splt[1]
+        }
+    }
+
     for y := 0; y != len(rawc[0]); y++ {
         for x := 0; x != len(rawc); x++ {
             for index := range *c.Recognizers {
-                rec := *c.Recognizers[index]
+                rec := (*c.Recognizers)[index]
                 if found, id := recognizeComponent(x, y, rec.Blueprint()); found {
+                    com := rec.NewComponent(id, x, y, values)
+                    components = append(components, com)
+                    *c.Components = components
                     
+                    fmt.Println(*c.Components)
                 }
             }
         }
