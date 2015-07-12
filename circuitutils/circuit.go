@@ -111,6 +111,10 @@ func (c Circuit) Parse(path string) {
         }
     }
 
+    getComponentById := func(id string) *Component {
+        
+    }
+
     for index := range *c.Components {
         (*c.Components)[index].Print()
     }

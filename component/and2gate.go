@@ -57,13 +57,11 @@ func (a And2Component) Print() {
 }
 
 func (a And2Component) Input(t string) *int {
-    if t == "I" {
-        if *a.Connected {
-            return a.InB
-        } else {
-            *a.Connected = true
-            return a.InA
-        }
+    if *a.Connected {
+        return a.InB
+    } else {
+        *a.Connected = true
+        return a.InA
     }
     return nil
 }
