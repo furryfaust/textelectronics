@@ -53,7 +53,7 @@ func (a And2Component) Update() {
 }
 
 func (a And2Component) Print() {
-    fmt.Println("InA:", a.InA, "InB:", a.InB, "Out", a.Out)
+    fmt.Println("And2 Gate ID:", a.id, "InA:", a.InA, "InB:", a.InB, "Out", a.Out)
 }
 
 func (a And2Component) Input(t string) *int {

@@ -2,7 +2,6 @@ package circuitutils
 
 import (
     "os"
-    "fmt"
     "bufio"
     "strings"
     "io/ioutil"
@@ -107,11 +106,13 @@ func (c Circuit) Parse(path string) {
                     com := rec.NewComponent(id, x, y, values)
                     components = append(components, com)
                     *c.Components = components
-                    
-                    fmt.Println(*c.Components)
                 }
             }
         }
+    }
+
+    for index := range *c.Components {
+        (*c.Components)[index].Print()
     }
 }
 
