@@ -3,6 +3,7 @@ package circuitutils
 import (
     "os"
     "bufio"
+    "regexp"
     "strings"
     "io/ioutil"
     "github.com/furryfaust/textelectronics/component"
@@ -111,8 +112,59 @@ func (c Circuit) Parse(path string) {
         }
     }
 
-    getComponentById := func(id string) *Component {
-        
+    getComponentById := func(id string) component.Component {
+        for i := range components {
+            if components[i].Id() == id {
+                return components[i]
+            }
+        }
+        return nil
+    }
+
+    getComponentByLocation := func(x int, y int) component.Component {
+        for i := range components {
+            cX, cY, cWidth, cHeight := components[i].Space()
+            if x >= cX && x <= cX + cWidth && y >= cY && y <= cY + cHeight {
+                return components[i]
+            }
+        }
+        return nil
+    }
+
+    recognizeIOType := func(x int, y int) (string, string, int, int, int) {
+        if x > 0 && len(rawc) - 1 > x {
+            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x + 1][y]); match {
+                com := getComponentByLocation(x - 1, y)
+                if com != nil {
+                    return rawc[x + 1][y], com.Id(), x + 2, y, 0
+                }
+            }
+        }
+        if x < len(rawc) && x > 0 {
+            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x - 1][y]); match {
+                com := getComponentByLocation(x + 1, y)
+                if com != nil {
+                    return rawc[x - 1][y], com.Id(), x - 2, y, 1
+                }
+            }
+        }
+        if y < len(rawc[0]) {
+            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x][y + 1]); match {
+                com := getComponentByLocation(x, y - 1)
+                if com != nil {
+                    return rawc[x][y + 1], com.Id(), x, y + 2, 2
+                }
+            }
+        }
+        if y > 0 {
+            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x][y - 1]); match {
+                com := getComponentByLocation(x, y + 1)
+                if com != nil {
+                    return rawc[x][y - 1], com.Id(), x, y - 2, 3
+                }
+            }
+        }
+        return "", "", 0, 0, 0
     }
 
     for index := range *c.Components {
