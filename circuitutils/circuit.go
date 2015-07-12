@@ -89,6 +89,17 @@ func (c Circuit) Parse(path string) {
         }
         return false, id
     }
+
+    for y := 0; y != len(rawc[0]); y++ {
+        for x := 0; x != len(rawc); x++ {
+            for index := range *c.Recognizers {
+                rec := *c.Recognizers[index]
+                if found, id := recognizeComponent(x, y, rec.Blueprint()); found {
+                    
+                }
+            }
+        }
+    }
 }
 
 
