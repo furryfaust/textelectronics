@@ -11,5 +11,5 @@ func main() {
     circuit.AddRecognizer(component.NewAnd2Recognizer())
     fmt.Println(*circuit.Recognizers)
 
-    circuit.Parse(os.Args[1])
+    
 }
