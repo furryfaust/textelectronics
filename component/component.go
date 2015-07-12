@@ -7,4 +7,6 @@ type Component interface {
     Print()
     Input(string) *int
     Output(string) *int
+    InputStreams() []string
+    OutputStreams() []string
 }

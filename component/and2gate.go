@@ -70,4 +70,11 @@ func (a And2Component) Output(t string) *int {
     return a.Out
 }
 
+func (a And2Component) InputStreams() []string {
+    return []string {"I"}
+}
+
+func (a And2Component) OutputStreams() []string {
+    return []string {"O"}
+}
 
