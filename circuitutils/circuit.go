@@ -167,6 +167,15 @@ func (c Circuit) Parse(path string) {
         return "", "", 0, 0, 0
     }
 
+    contains := func(query string, slice []string) bool {
+        for index := range slice {
+            if slice[index] == query {
+                return true
+            }
+        }
+        return false
+    }
+
     for index := range *c.Components {
         (*c.Components)[index].Print()
     }
