@@ -133,33 +133,33 @@ func (c Circuit) Parse(path string) {
 
     recognizeIOType := func(x int, y int) (string, string, int, int, int) {
         if x > 0 && len(rawc) - 1 > x {
-            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x + 1][y]); match {
-                com := getComponentByLocation(x - 1, y)
-                if com != nil {
+            com := getComponentByLocation(x - 1, y)
+            if com != nil {
+                if contains(rawc[x + 1][y], com.OutputStreams()) || contains(rawc[x + 1][y], com.InputStreams()) {
                     return rawc[x + 1][y], com.Id(), x + 2, y, 0
                 }
             }
         }
         if x < len(rawc) && x > 0 {
-            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x - 1][y]); match {
-                com := getComponentByLocation(x + 1, y)
-                if com != nil {
+            com := getComponentByLocation(x + 1, y)
+            if com != nil {
+                if contains(rawc[x - 1][y], com.OutputStreams()) || contains(rawc[x - 1][y], com.InputStreams()) {
                     return rawc[x - 1][y], com.Id(), x - 2, y, 1
                 }
             }
         }
         if y < len(rawc[0]) {
-            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x][y + 1]); match {
-                com := getComponentByLocation(x, y - 1)
-                if com != nil {
+            com := getComponentByLocation(x, y - 1)
+            if com != nil {
+                if contains(rawc[x][y + 1], com.OutputStreams()) || contains(rawc[x][y + 1], com.InputStreams()) {
                     return rawc[x][y + 1], com.Id(), x, y + 2, 2
                 }
             }
         }
         if y > 0 {
-            if match, _ := regexp.MatchString("[a-zA-Z]", rawc[x][y - 1]); match {
-                com := getComponentByLocation(x, y + 1)
-                if com != nil {
+            com := getComponentByLocation(x, y + 1)
+            if com != nil {
+                if contains(rawc[x][y - 1], com.OutputStreams()) || contains(rawc[x][y - 1], com.InputStreams()) {
                     return rawc[x][y - 1], com.Id(), x, y - 2, 3
                 }
             }
