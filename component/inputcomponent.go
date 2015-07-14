@@ -17,7 +17,7 @@ func (i InputRecognizer) NewComponent(id string, x int, y int, input map[string]
     rawo := input[id]
     out, err := strconv.Atoi(rawo)
     if err != nil {
-        panic(err)
+        out = 0
     }
     width, height := len(i.blueprint) - 1, len(i.blueprint[0]) - 1
     inputcom := InputComponent {id:id, X:x, Y:y, Width:width, Height:height, Out:&out}
