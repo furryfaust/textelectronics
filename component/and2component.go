@@ -14,8 +14,9 @@ func (a And2Recognizer) Blueprint() [][]string {
 
 func (a And2Recognizer) NewComponent(id string, x int, y int, input map[string]string) Component{
     ina, inb, out := 0, 0, 0
+    connected := false
     width, height := len(a.blueprint) - 1, len(a.blueprint[0]) - 1
-    and2com := And2Component {id:id, X:x, Y:y, Width:width, Height:height, InA:&ina, InB:&inb, Out:&out}
+    and2com := And2Component {id:id, X:x, Y:y, Width:width, Height:height, Connected:&connected, InA:&ina, InB:&inb, Out:&out}
     return and2com
 }
 
@@ -63,7 +64,6 @@ func (a And2Component) Input(t string) *int {
         *a.Connected = true
         return a.InA
     }
-    return nil
 }
 
 func (a And2Component) Output(t string) *int {

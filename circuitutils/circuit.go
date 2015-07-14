@@ -180,37 +180,85 @@ func (c Circuit) Parse(path string) {
 
     for y := 0; y != len(rawc[0]); y++ {
         for x := 0; x != len(rawc); x++ {
-            mio, mid, cX, cY, direction := recognizeIOType(x, y)
-            if mid != "" {
-                mcom := getComponentById(mid)
+            if rawc[x][y] == "%" {
+                mio, mid, cX, cY, direction := recognizeIOType(x, y)
+                    mcom := getComponentById(mid)
 
-                var seekInput func(x int, y int, direction int)
-                seekInput = func(x int, y int, direction int) {
-                    switch direction {
-                        case 0:
-                            x++
-                            if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
-                                seekInput(x, y, direction)
-                            }
-                            if rawc[x][y] == "%" {
-                                fio, fid, _, _, _ := recognizeIOType(x, y)
+                    if contains(mio, mcom.OutputStreams()) {
+                        var seekInput func(x int, y int, direction int)
+                        seekInput = func(x int, y int, direction int) {
+                            switch direction {
+                                case 0:
+                                    x++
+                                    if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
+                                        seekInput(x, y, direction)
+                                    }
+                                    if rawc[x][y] == "%" {
+                                        fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                fcom := getComponentById(fid)
-                                *fcom.Input(fio) = *mcom.Output(mio)
-                            }
-                            if rawc[x][y] == "+" {
-                                seekInput(x, y, 2)
-                                seekInput(x, y, 3)
-                            }
-                        
-                        case 1:
-                            x--
-                            if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
-                                seekInput(x, y, direction)
-                            }
+                                        fcom := getComponentById(fid)
+                                        fmt.Println(mid, "connected to", fid)
+                                        *fcom.Input(fio) = *mcom.Output(mio)
+                                        fcom.Update()
+                                    }
+                                    if rawc[x][y] == "+" {
+                                        seekInput(x, y, 2)
+                                        seekInput(x, y, 3)
+                                    }
+                                case 1:
+                                    x--
+                                    if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
+                                        seekInput(x, y, direction)
+                                    }
+                                    if rawc[x][y] == "%" {
+                                        fio, fid, _, _, _ := recognizeIOType(x, y)
 
+                                        fcom := getComponentById(fid)
+                                        fmt.Println(mid, "connected to", fid)
+                                        *fcom.Input(fio) = *mcom.Output(mio)
+                                        fcom.Update()
+                                    }
+                                    if rawc[x][y] == "+" {
+                                        seekInput(x, y, 2)
+                                        seekInput(x, y, 3)
+                                    }
+                                case 2:
+                                    y++
+                                    if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
+                                        seekInput(x, y, direction)
+                                    }
+                                    if rawc[x][y] == "%" {
+                                        fio, fid, _, _, _ := recognizeIOType(x, y)
+
+                                        fcom := getComponentById(fid)
+                                        fmt.Println(mid, "connected to", fid)
+                                        *fcom.Input(fio) = *mcom.Output(mio)
+                                        fcom.Update()
+                                    }
+                                    if rawc[x][y] == "+" {
+                                        seekInput(x, y, 0)
+                                        seekInput(x, y, 1)
+                                    }
+                                case 3:
+                                    y--
+                                    if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
+                                        seekInput(x, y, direction)
+                                    }
+                                    if rawc[x][y] == "%" {
+                                        fio, fid, _, _, _ := recognizeIOType(x, y)
+
+                                        fcom := getComponentById(fid)
+                                        fmt.Println(mid, "connected to", fid)
+                                        *fcom.Input(fio) = *mcom.Output(mio)
+                                        fcom.Update()
+                                    }
+                                    if rawc[x][y] == "+" {
+                                        seekInput(x, y, 0)
+                                        seekInput(x, y, 1)
+                                    }
+                            }}
+                        seekInput(cX, cY, direction)
                     }
-                }
             }
         }
     }
