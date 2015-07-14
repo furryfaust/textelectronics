@@ -2,7 +2,6 @@ package circuitutils
 
 import (
     "os"
-    "fmt"
     "bufio"
     "regexp"
     "strings"
@@ -197,7 +196,6 @@ func (c Circuit) Parse(path string) {
                                         fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                         fcom := getComponentById(fid)
-                                        fmt.Println(mid, "connected to", fid)
                                         *fcom.Input(fio) = *mcom.Output(mio)
                                         fcom.Update()
                                     }
@@ -214,7 +212,6 @@ func (c Circuit) Parse(path string) {
                                         fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                         fcom := getComponentById(fid)
-                                        fmt.Println(mid, "connected to", fid)
                                         *fcom.Input(fio) = *mcom.Output(mio)
                                         fcom.Update()
                                     }
@@ -231,7 +228,6 @@ func (c Circuit) Parse(path string) {
                                         fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                         fcom := getComponentById(fid)
-                                        fmt.Println(mid, "connected to", fid)
                                         *fcom.Input(fio) = *mcom.Output(mio)
                                         fcom.Update()
                                     }
@@ -248,7 +244,6 @@ func (c Circuit) Parse(path string) {
                                         fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                         fcom := getComponentById(fid)
-                                        fmt.Println(mid, "connected to", fid)
                                         *fcom.Input(fio) = *mcom.Output(mio)
                                         fcom.Update()
                                     }
