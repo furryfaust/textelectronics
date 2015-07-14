@@ -9,6 +9,6 @@ import (
 func main() {
     circuit := circuitutils.NewCircuit()
     circuit.AddRecognizer(component.NewAnd2Recognizer())
-
+    circuit.AddRecognizer(component.NewInputRecognizer())
     circuit.Parse(os.Args[1])
 }
