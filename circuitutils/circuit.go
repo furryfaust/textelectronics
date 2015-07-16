@@ -106,9 +106,11 @@ func (c Circuit) Parse(path string) {
             for index := range *c.Recognizers {
                 rec := (*c.Recognizers)[index]
                 if found, id := recognizeComponent(x, y, rec.Blueprint()); found {
-                    com := rec.NewComponent(id, x, y, values)
-                    components = append(components, com)
-                    *c.Components = components
+                    if id != "" {
+                        com := rec.NewComponent(id, x, y, values)
+                        components = append(components, com)
+                        *c.Components = components
+                    }
                 }
             }
         }
