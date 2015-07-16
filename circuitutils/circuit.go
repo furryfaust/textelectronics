@@ -79,10 +79,12 @@ func (c Circuit) Parse(path string) {
         if (rawc[x][y] == blueprint[0][0]) {
             for i := 0; i != len(blueprint); i++ {
                 for j := 0; j != len(blueprint[0]); j++ {
-                    if rawc[x + i][y + j] != blueprint[i][j] && blueprint[i][j] != "." && blueprint[i][j] != "" {
-                        return false, id
-                    } else if blueprint[i][j] == "." {
-                        id = rawc[x + i][y + j]
+                    if len(rawc) > x + i && len(rawc[0]) > y + j {
+                        if rawc[x + i][y + j] != blueprint[i][j] && blueprint[i][j] != "." && blueprint[i][j] != "" {
+                            return false, id
+                        } else if blueprint[i][j] == "." {
+                            id = rawc[x + i][y + j]
+                        }
                     }
                 }
             }
