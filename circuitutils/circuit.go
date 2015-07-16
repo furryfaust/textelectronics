@@ -191,67 +191,75 @@ func (c Circuit) Parse(path string) {
                             switch direction {
                                 case 0:
                                     x++
-                                    if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
-                                        seekInput(x, y, direction)
-                                    }
-                                    if rawc[x][y] == "%" {
-                                        fio, fid, _, _, _ := recognizeIOType(x, y)
+                                    if len(rawc) > x {
+                                        if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
+                                            seekInput(x, y, direction)
+                                        }
+                                        if rawc[x][y] == "%" {
+                                            fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                        fcom := getComponentById(fid)
-                                        *fcom.Input(fio) = *mcom.Output(mio)
-                                        fcom.Update()
-                                    }
-                                    if rawc[x][y] == "+" {
-                                        seekInput(x, y, 2)
-                                        seekInput(x, y, 3)
+                                            fcom := getComponentById(fid)
+                                            *fcom.Input(fio) = *mcom.Output(mio)
+                                            fcom.Update()
+                                        }
+                                        if rawc[x][y] == "+" {
+                                            seekInput(x, y, 2)
+                                            seekInput(x, y, 3)
+                                        }
                                     }
                                 case 1:
                                     x--
-                                    if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
-                                        seekInput(x, y, direction)
-                                    }
-                                    if rawc[x][y] == "%" {
-                                        fio, fid, _, _, _ := recognizeIOType(x, y)
+                                    if x >= 0 {
+                                        if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
+                                            seekInput(x, y, direction)
+                                        }
+                                        if rawc[x][y] == "%" {
+                                            fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                        fcom := getComponentById(fid)
-                                        *fcom.Input(fio) = *mcom.Output(mio)
-                                        fcom.Update()
-                                    }
-                                    if rawc[x][y] == "+" {
-                                        seekInput(x, y, 2)
-                                        seekInput(x, y, 3)
+                                            fcom := getComponentById(fid)
+                                            *fcom.Input(fio) = *mcom.Output(mio)
+                                            fcom.Update()
+                                        }
+                                        if rawc[x][y] == "+" {
+                                            seekInput(x, y, 2)
+                                            seekInput(x, y, 3)
+                                        }
                                     }
                                 case 2:
                                     y++
-                                    if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
-                                        seekInput(x, y, direction)
-                                    }
-                                    if rawc[x][y] == "%" {
-                                        fio, fid, _, _, _ := recognizeIOType(x, y)
+                                    if len(rawc[0]) > y {
+                                        if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
+                                            seekInput(x, y, direction)
+                                        }
+                                        if rawc[x][y] == "%" {
+                                            fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                        fcom := getComponentById(fid)
-                                        *fcom.Input(fio) = *mcom.Output(mio)
-                                        fcom.Update()
-                                    }
-                                    if rawc[x][y] == "+" {
-                                        seekInput(x, y, 0)
-                                        seekInput(x, y, 1)
+                                            fcom := getComponentById(fid)
+                                            *fcom.Input(fio) = *mcom.Output(mio)
+                                            fcom.Update()
+                                        }
+                                        if rawc[x][y] == "+" {
+                                            seekInput(x, y, 0)
+                                            seekInput(x, y, 1)
+                                        }
                                     }
                                 case 3:
                                     y--
-                                    if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
-                                        seekInput(x, y, direction)
-                                    }
-                                    if rawc[x][y] == "%" {
-                                        fio, fid, _, _, _ := recognizeIOType(x, y)
+                                    if y >= 0 {
+                                        if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
+                                            seekInput(x, y, direction)
+                                        }
+                                        if rawc[x][y] == "%" {
+                                            fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                        fcom := getComponentById(fid)
-                                        *fcom.Input(fio) = *mcom.Output(mio)
-                                        fcom.Update()
-                                    }
-                                    if rawc[x][y] == "+" {
-                                        seekInput(x, y, 0)
-                                        seekInput(x, y, 1)
+                                            fcom := getComponentById(fid)
+                                            *fcom.Input(fio) = *mcom.Output(mio)
+                                            fcom.Update()
+                                        }
+                                        if rawc[x][y] == "+" {
+                                            seekInput(x, y, 0)
+                                            seekInput(x, y, 1)
+                                        }
                                     }
                             }}
                         seekInput(cX, cY, direction)
