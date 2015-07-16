@@ -47,7 +47,7 @@ func (i InputComponent) Space() (int, int, int, int) {
 func (i InputComponent) Update() {}
 
 func (i InputComponent) Print() {
-    fmt.Println("Input ID:", i.id, "Out", *i.Out)
+    fmt.Println("Input ID:", i.id, "Out:", *i.Out)
 }
 
 func (i InputComponent) Input(t string) *int {
