@@ -4,4 +4,4 @@
          | |
          +-+
 
-One Input connected to both input streams on And gate
+A and A
