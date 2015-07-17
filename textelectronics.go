@@ -12,6 +12,7 @@ func main() {
     circuit.AddRecognizer(component.NewInputRecognizer())
     circuit.AddRecognizer(component.NewOr2Recognizer())
     circuit.AddRecognizer(component.NewNotRecognizer())
-    
+    circuit.AddRecognizer(component.NewXor2Recognizer())
+
     circuit.Parse(os.Args[1])
 }
