@@ -17,7 +17,7 @@ func (o Or2Recognizer) NewComponent(id string, x int, y int, input map[string]st
     connected := false
     width, height := len(o.blueprint) - 1, len(o.blueprint[0]) - 1
     or2com := Or2Component {id:id, X:x, Y:y, Width:width, Height:height, Connected:&connected, InA:&ina, InB:&inb, Out:&out}
-    return or2com
+    return &or2com
 }
 
 func NewOr2Recognizer() Or2Recognizer {
@@ -57,12 +57,12 @@ func (o Or2Component) Print() {
     fmt.Println("Or2 Gate ID:", o.id, "InA:", *o.InA, "InB:", *o.InB, "Out:", *o.Out)
 }
 
-func (o Or2Component) Input(t string) *int {
+func (o *Or2Component) Connect(c *int, t string) {
     if *o.Connected {
-        return o.InB
+        o.InB = c
     } else {
         *o.Connected = true
-        return o.InA
+        o.InA = c
     }
 }
 

@@ -21,7 +21,7 @@ func (i InputRecognizer) NewComponent(id string, x int, y int, input map[string]
     }
     width, height := len(i.blueprint) - 1, len(i.blueprint[0]) - 1
     inputcom := InputComponent {id:id, X:x, Y:y, Width:width, Height:height, Out:&out}
-    return inputcom
+    return &inputcom
 }
 
 func NewInputRecognizer() InputRecognizer {
@@ -50,9 +50,7 @@ func (i InputComponent) Print() {
     fmt.Println("Input ID:", i.id, "Out:", *i.Out)
 }
 
-func (i InputComponent) Input(t string) *int {
-    return nil
-}
+func (i *InputComponent) Connect(c *int, t string) {}
 
 func (i InputComponent) Output(t string) *int {
     return i.Out

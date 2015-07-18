@@ -201,8 +201,7 @@ func (c Circuit) Parse(path string) {
                                             fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                             fcom := getComponentById(fid)
-                                            *fcom.Input(fio) = *mcom.Output(mio)
-                                            fcom.Update()
+                                            fcom.Connect(mcom.Output(mio), fio)
                                         }
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 2)
@@ -219,8 +218,7 @@ func (c Circuit) Parse(path string) {
                                             fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                             fcom := getComponentById(fid)
-                                            *fcom.Input(fio) = *mcom.Output(mio)
-                                            fcom.Update()
+                                            fcom.Connect(mcom.Output(mio), fio)
                                         }
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 2)
@@ -237,8 +235,7 @@ func (c Circuit) Parse(path string) {
                                             fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                             fcom := getComponentById(fid)
-                                            *fcom.Input(fio) = *mcom.Output(mio)
-                                            fcom.Update()
+                                            fcom.Connect(mcom.Output(mio), fio)
                                         }
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 0)
@@ -255,8 +252,7 @@ func (c Circuit) Parse(path string) {
                                             fio, fid, _, _, _ := recognizeIOType(x, y)
 
                                             fcom := getComponentById(fid)
-                                            *fcom.Input(fio) = *mcom.Output(mio)
-                                            fcom.Update()
+                                            fcom.Connect(mcom.Output(mio), fio)
                                         }
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 0)
@@ -268,6 +264,10 @@ func (c Circuit) Parse(path string) {
                     }
             }
         }
+    }
+
+    for index := range *c.Components {
+        (*c.Components)[index].Update()
     }
 
     for index := range *c.Components {

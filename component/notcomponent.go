@@ -16,7 +16,7 @@ func (n NotRecognizer) NewComponent(id string, x int, y int, input map[string]st
     in, out := 0, 1
     width, height := len(n.blueprint) - 1, len(n.blueprint[0]) - 1
     notcom := NotComponent {id:id, X:x, Y:y, Width:width, Height:height, In:&in, Out:&out}
-    return notcom
+    return &notcom
 }
 
 func NewNotRecognizer() NotRecognizer {
@@ -52,8 +52,8 @@ func (n NotComponent) Print() {
     fmt.Println("Not Gate ID:", n.id, "In:", *n.In, "Out:", *n.Out)
 }
 
-func (n NotComponent) Input(t string) *int {
-    return n.In
+func (n *NotComponent) Connect(c *int, t string) {
+    n.In = c
 }
 
 func (n NotComponent) Output(t string) *int {

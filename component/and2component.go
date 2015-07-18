@@ -17,7 +17,7 @@ func (a And2Recognizer) NewComponent(id string, x int, y int, input map[string]s
     connected := false
     width, height := len(a.blueprint) - 1, len(a.blueprint[0]) - 1
     and2com := And2Component {id:id, X:x, Y:y, Width:width, Height:height, Connected:&connected, InA:&ina, InB:&inb, Out:&out}
-    return and2com
+    return &and2com
 }
 
 func NewAnd2Recognizer() And2Recognizer {
@@ -57,12 +57,12 @@ func (a And2Component) Print() {
     fmt.Println("And2 Gate ID:", a.id, "InA:", *a.InA, "InB:", *a.InB, "Out:", *a.Out)
 }
 
-func (a And2Component) Input(t string) *int {
+func (a *And2Component) Connect(c *int, t string) {
     if *a.Connected {
-        return a.InB
+        a.InB = c
     } else {
         *a.Connected = true
-        return a.InA
+        a.InA = c
     }
 }
 

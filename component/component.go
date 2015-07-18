@@ -5,7 +5,7 @@ type Component interface {
     Space() (int, int, int, int)
     Update()
     Print()
-    Input(string) *int
+    Connect(*int, string)
     Output(string) *int
     InputStreams() []string
     OutputStreams() []string

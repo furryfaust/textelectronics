@@ -17,7 +17,7 @@ func (xo Xor2Recognizer) NewComponent(id string, x int, y int, input map[string]
     connected := false
     width, height := len(xo.blueprint) - 1, len(xo.blueprint[0]) - 1
     xor2com := Xor2Component {id:id, X:x, Y:y, Width:width, Height:height, Connected:&connected, InA:&ina, InB:&inb, Out:&out}
-    return xor2com
+    return &xor2com
 }
 
 func NewXor2Recognizer() Xor2Recognizer {
@@ -57,12 +57,12 @@ func (x Xor2Component) Print() {
     fmt.Println("Xor2 Gate ID:", x.id, "InA:", *x.InA, "InB:", *x.InB, "Out:", *x.Out)
 }
 
-func (x Xor2Component) Input(t string) *int {
+func (x *Xor2Component) Connect(c *int, t string) {
     if *x.Connected {
-        return x.InB
+        x.InB = c
     } else {
         *x.Connected = true
-        return x.InA
+        x.InA = c
     }
 }
 
