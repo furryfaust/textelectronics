@@ -1,8 +1,6 @@
 package component
 
-import (
-    "fmt"
-)
+import "fmt"
 
 type Xor2Recognizer struct {
     blueprint [][]string

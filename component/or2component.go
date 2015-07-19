@@ -1,8 +1,6 @@
 package component
 
-import (
-    "fmt"
-)
+import "fmt"
 
 type Or2Recognizer struct {
     blueprint [][]string
