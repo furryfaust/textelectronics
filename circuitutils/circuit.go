@@ -206,6 +206,7 @@ func (c Circuit) Parse(path string) {
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 2)
                                             seekInput(x, y, 3)
+                                            seekInput(x, y, direction)
                                         }
                                     }
                                 case 1:
@@ -223,6 +224,7 @@ func (c Circuit) Parse(path string) {
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 2)
                                             seekInput(x, y, 3)
+                                            seekInput(x, y, direction)
                                         }
                                     }
                                 case 2:
@@ -240,6 +242,7 @@ func (c Circuit) Parse(path string) {
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 0)
                                             seekInput(x, y, 1)
+                                            seekInput(x, y, direction)
                                         }
                                     }
                                 case 3:
@@ -257,6 +260,7 @@ func (c Circuit) Parse(path string) {
                                         if rawc[x][y] == "+" {
                                             seekInput(x, y, 0)
                                             seekInput(x, y, 1)
+                                            seekInput(x, y, direction)
                                         }
                                     }
                             }}
