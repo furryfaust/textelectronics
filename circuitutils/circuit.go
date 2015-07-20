@@ -2,6 +2,7 @@ package circuitutils
 
 import (
     "os"
+    "time"
     "bufio"
     "regexp"
     "strings"
@@ -270,27 +271,20 @@ func (c Circuit) Parse(path string) {
         }
     }
 
-    for index := range *c.Components {
-        (*c.Components)[index].Update()
+    copy := rawc
+    printCircuit := func() {
+        
     }
 
-    for index := range *c.Components {
-        (*c.Components)[index].Print()
+    for {
+        for index := range *c.Components {
+            (*c.Components)[index].Update()
+        }
+
+        for index := range *c.Components {
+            (*c.Components)[index].Print()
+        }
+
+        time.Sleep(time.Millisecond)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
