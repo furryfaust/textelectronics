@@ -26,9 +26,9 @@ func (c ClockRecognizer) NewComponent(id string, x int, y int, input map[string]
 }  
 
 func NewClockRecognizer() ClockRecognizer {
-    blueprint := [][]string {{"", "*", ""},
+    blueprint := [][]string {{" ", "*", " "},
                              {"*", ".", "*"},
-                             {"", "*", ""}}
+                             {" ", "*", " "}}
     clockrec := ClockRecognizer {blueprint:blueprint}
     return clockrec
 }
@@ -64,7 +64,7 @@ func (c *ClockComponent) Update() {
 }
 
 func (c ClockComponent) Print() {
-    fmt.Println("Clock ID:", c.id, "In:", *c.In, "Out:", *c.Out)
+    fmt.Println("Clock ID:", c.id, "Out:", *c.Out)
 }
 
 func (cl *ClockComponent) Connect(c *int, t string) {
