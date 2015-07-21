@@ -29,7 +29,7 @@ func (c Circuit) AddRecognizer(recognizer component.Recognizer) {
     *c.Recognizers = append(recognizers, recognizer)
 }
 
-func (c Circuit) Parse(path string) {
+func (c Circuit) Simulate(path string) {
     dat, err := ioutil.ReadFile(path)
     if err != nil {
         panic(err)
@@ -271,12 +271,13 @@ func (c Circuit) Parse(path string) {
         }
     }
 
-    copy := rawc
-    printCircuit := func() {
-        
-    }
+    stop := false
+    go func() {
+        time.Sleep(time.Second * 2)
+        stop = true
+    }()
 
-    for {
+    for stop == false {
         for index := range *c.Components {
             (*c.Components)[index].Update()
         }
@@ -285,6 +286,6 @@ func (c Circuit) Parse(path string) {
             (*c.Components)[index].Print()
         }
 
-        time.Sleep(time.Millisecond)
+        time.Sleep(time.Millisecond * 1000)
     }
 }

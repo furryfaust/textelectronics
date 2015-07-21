@@ -15,5 +15,5 @@ func main() {
     circuit.AddRecognizer(component.NewNotRecognizer())
     circuit.AddRecognizer(component.NewXor2Recognizer())
     circuit.AddRecognizer(component.NewClockRecognizer())
-    circuit.Parse(os.Args[1])
+    circuit.Simulate(os.Args[1])
 }
