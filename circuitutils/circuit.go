@@ -5,6 +5,7 @@ import (
     "fmt"
     "time"
     "bufio"
+    "strconv"
     "reflect"
     "regexp"
     "strings"
@@ -273,10 +274,15 @@ func (c Circuit) Simulate(path string) {
         }
     }
 
-    
+    rawcy := values["cycles"]
+    cycles, err := strconv.Atoi(rawcy)
+    if err != nil {
+        cycles = 0
+    }
+
     stop := false
     go func() {
-        time.Sleep(time.Second * 20)
+        time.Sleep(time.Second * time.Duration(cycles))
         stop = true
     }()
 
@@ -312,6 +318,5 @@ func (c Circuit) Simulate(path string) {
 
         time.Sleep(time.Second)
     }
-
 
 }
