@@ -277,18 +277,11 @@ func (c Circuit) Simulate(path string) {
     rawcy := values["cycles"]
     cycles, err := strconv.Atoi(rawcy)
     if err != nil {
-        cycles = 0
+        cycles = 1
     }
-
-    stop := false
-    go func() {
-        time.Sleep(time.Second * time.Duration(cycles))
-        stop = true
-    }()
 
     copy := rawc
     printICircuit := func() {
-
         for _, component := range components {
             if reflect.TypeOf(component).Elem().Name() == "ProbeComponent" {
                 x, y, _, _ := component.Space()
@@ -309,12 +302,15 @@ func (c Circuit) Simulate(path string) {
         }
     }
 
-    for stop == false {
-        printICircuit()
+    cycle := 0
+    for cycle != cycles {
+        cycle++
 
         for index := range *c.Components {
             (*c.Components)[index].Update()
         }
+
+        printICircuit()
 
         time.Sleep(time.Second)
     }
