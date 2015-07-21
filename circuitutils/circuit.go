@@ -2,8 +2,10 @@ package circuitutils
 
 import (
     "os"
+    "fmt"
     "time"
     "bufio"
+    "reflect"
     "regexp"
     "strings"
     "io/ioutil"
@@ -271,21 +273,45 @@ func (c Circuit) Simulate(path string) {
         }
     }
 
+    
     stop := false
     go func() {
-        time.Sleep(time.Second * 2)
+        time.Sleep(time.Second * 20)
         stop = true
     }()
 
+    printICircuit := func() {
+        copy := rawc
+
+        for _, component := range components {
+            if reflect.TypeOf(component).Elem().Name() == "ProbeComponent" {
+                x, y, _, _ := component.Space()
+                val := *component.Output("O")
+                if val == 0 {
+                    copy[x][y + 1] = "0"
+                } else {
+                    copy[x][y + 1] = "1"
+                }
+            }
+        }
+
+        for x := 0; x != len(copy); x++ {
+            for y := 0; y != len(copy[0]); y++ {
+                fmt.Printf("%s", copy[x][y])
+            }
+            fmt.Println()
+        }
+    }
+
     for stop == false {
+        printICircuit()
+        
         for index := range *c.Components {
             (*c.Components)[index].Update()
         }
 
-        for index := range *c.Components {
-            (*c.Components)[index].Print()
-        }
-
-        time.Sleep(time.Millisecond * 1000)
+        time.Sleep(time.Second)
     }
+
+
 }

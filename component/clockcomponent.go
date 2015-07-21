@@ -18,7 +18,7 @@ func (c ClockRecognizer) NewComponent(id string, x int, y int, input map[string]
     tick := 0
     interval, err := strconv.Atoi(input[id])
     if err != nil {
-        interval = 100
+        interval = 1
     }
     width, height := len(c.blueprint) - 1, len(c.blueprint[0]) - 1
     clockcom := ClockComponent {id:id, X:x, Y:y, Width:width, Height:height, Tick:tick, Interval:interval, In:&in, Out:&out}
