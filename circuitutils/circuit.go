@@ -280,8 +280,8 @@ func (c Circuit) Simulate(path string) {
         stop = true
     }()
 
+    copy := rawc
     printICircuit := func() {
-        copy := rawc
 
         for _, component := range components {
             if reflect.TypeOf(component).Elem().Name() == "ProbeComponent" {
@@ -305,7 +305,7 @@ func (c Circuit) Simulate(path string) {
 
     for stop == false {
         printICircuit()
-        
+
         for index := range *c.Components {
             (*c.Components)[index].Update()
         }
