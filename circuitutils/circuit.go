@@ -119,7 +119,6 @@ func (c Circuit) Simulate(path string) {
             }
         }
     }
-
     
     getComponentById := func(id string) component.Component {
         for i := range components {
@@ -191,84 +190,86 @@ func (c Circuit) Simulate(path string) {
                 mio, mid, cX, cY, direction := recognizeIOType(x, y)
                     mcom := getComponentById(mid)
 
-                    if contains(mio, mcom.OutputStreams()) {
-                        var seekInput func(x int, y int, direction int)
-                        seekInput = func(x int, y int, direction int) {
-                            switch direction {
-                                case 0:
-                                    x++
-                                    if len(rawc) > x {
-                                        if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
-                                            seekInput(x, y, direction)
-                                        }
-                                        if rawc[x][y] == "%" {
-                                            fio, fid, _, _, _ := recognizeIOType(x, y)
+                    if mcom != nil {
+                        if contains(mio, mcom.OutputStreams()) {
+                            var seekInput func(x int, y int, direction int)
+                            seekInput = func(x int, y int, direction int) {
+                                switch direction {
+                                    case 0:
+                                        x++
+                                        if len(rawc) > x {
+                                            if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
+                                                seekInput(x, y, direction)
+                                            }
+                                            if rawc[x][y] == "%" {
+                                                fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                            fcom := getComponentById(fid)
-                                            fcom.Connect(mcom.Output(mio), fio)
+                                                fcom := getComponentById(fid)
+                                                fcom.Connect(mcom.Output(mio), fio)
+                                            }
+                                            if rawc[x][y] == "+" {
+                                                seekInput(x, y, 2)
+                                                seekInput(x, y, 3)
+                                                seekInput(x, y, direction)
+                                            }
                                         }
-                                        if rawc[x][y] == "+" {
-                                            seekInput(x, y, 2)
-                                            seekInput(x, y, 3)
-                                            seekInput(x, y, direction)
-                                        }
-                                    }
-                                case 1:
-                                    x--
-                                    if x >= 0 {
-                                        if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
-                                            seekInput(x, y, direction)
-                                        }
-                                        if rawc[x][y] == "%" {
-                                            fio, fid, _, _, _ := recognizeIOType(x, y)
+                                    case 1:
+                                        x--
+                                        if x >= 0 {
+                                            if match, _ := regexp.MatchString("[|a-zA-Z]", rawc[x][y]); match {
+                                                seekInput(x, y, direction)
+                                            }
+                                            if rawc[x][y] == "%" {
+                                                fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                            fcom := getComponentById(fid)
-                                            fcom.Connect(mcom.Output(mio), fio)
+                                                fcom := getComponentById(fid)
+                                                fcom.Connect(mcom.Output(mio), fio)
+                                            }
+                                            if rawc[x][y] == "+" {
+                                                seekInput(x, y, 2)
+                                                seekInput(x, y, 3)
+                                                seekInput(x, y, direction)
+                                            }
                                         }
-                                        if rawc[x][y] == "+" {
-                                            seekInput(x, y, 2)
-                                            seekInput(x, y, 3)
-                                            seekInput(x, y, direction)
-                                        }
-                                    }
-                                case 2:
-                                    y++
-                                    if len(rawc[0]) > y {
-                                        if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
-                                            seekInput(x, y, direction)
-                                        }
-                                        if rawc[x][y] == "%" {
-                                            fio, fid, _, _, _ := recognizeIOType(x, y)
+                                    case 2:
+                                        y++
+                                        if len(rawc[0]) > y {
+                                            if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
+                                                seekInput(x, y, direction)
+                                            }
+                                            if rawc[x][y] == "%" {
+                                                fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                            fcom := getComponentById(fid)
-                                            fcom.Connect(mcom.Output(mio), fio)
+                                                fcom := getComponentById(fid)
+                                                fcom.Connect(mcom.Output(mio), fio)
+                                            }
+                                            if rawc[x][y] == "+" {
+                                                seekInput(x, y, 0)
+                                                seekInput(x, y, 1)
+                                                seekInput(x, y, direction)
+                                            }
                                         }
-                                        if rawc[x][y] == "+" {
-                                            seekInput(x, y, 0)
-                                            seekInput(x, y, 1)
-                                            seekInput(x, y, direction)
-                                        }
-                                    }
-                                case 3:
-                                    y--
-                                    if y >= 0 {
-                                        if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
-                                            seekInput(x, y, direction)
-                                        }
-                                        if rawc[x][y] == "%" {
-                                            fio, fid, _, _, _ := recognizeIOType(x, y)
+                                    case 3:
+                                        y--
+                                        if y >= 0 {
+                                            if match, _ := regexp.MatchString("[-a-zA-Z]", rawc[x][y]); match {
+                                                seekInput(x, y, direction)
+                                            }
+                                            if rawc[x][y] == "%" {
+                                                fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                            fcom := getComponentById(fid)
-                                            fcom.Connect(mcom.Output(mio), fio)
+                                                fcom := getComponentById(fid)
+                                                fcom.Connect(mcom.Output(mio), fio)
+                                            }
+                                            if rawc[x][y] == "+" {
+                                                seekInput(x, y, 0)
+                                                seekInput(x, y, 1)
+                                                seekInput(x, y, direction)
+                                            }
                                         }
-                                        if rawc[x][y] == "+" {
-                                            seekInput(x, y, 0)
-                                            seekInput(x, y, 1)
-                                            seekInput(x, y, direction)
-                                        }
-                                    }
-                            }}
-                        seekInput(cX, cY, direction)
+                                }}
+                            seekInput(cX, cY, direction)
+                        }
                     }
             }
         }
@@ -308,6 +309,10 @@ func (c Circuit) Simulate(path string) {
 
         for index := range *c.Components {
             (*c.Components)[index].Update()
+        }
+
+        for _, component := range *c.Components {
+            component.Print()
         }
 
         printICircuit()
