@@ -8,6 +8,7 @@ import (
 
 func main() {
     circuit := circuitutils.NewCircuit()
+
     circuit.AddRecognizer(component.NewAnd2Recognizer())
     circuit.AddRecognizer(component.NewInputRecognizer())
     circuit.AddRecognizer(component.NewProbeRecognizer())
@@ -16,5 +17,6 @@ func main() {
     circuit.AddRecognizer(component.NewXor2Recognizer())
     circuit.AddRecognizer(component.NewClockRecognizer())
     circuit.AddRecognizer(component.NewFlipFlopRecognizer())
+    
     circuit.Simulate(os.Args[1])
 }

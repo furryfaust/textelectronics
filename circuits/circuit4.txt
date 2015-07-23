@@ -1,4 +1,4 @@
-    Binary Up Counter (0 - 4) with Flip Flops in TEXT ELECTRONICS BY FURRYFAUST :)
+    Binary Up Counter (0 - 3) with Flip Flops in TEXT ELECTRONICS BY FURRYFAUST :)
 
                             +---------------------+         +----------------+
                             |                     |         |                |
