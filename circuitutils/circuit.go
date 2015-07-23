@@ -212,6 +212,9 @@ func (c Circuit) Simulate(path string) {
                                                 seekInput(x, y, 3)
                                                 seekInput(x, y, direction)
                                             }
+                                            if rawc[x][y] == "-" && rawc[x + 1][y] == "|" {
+                                                seekInput(x, y, direction)
+                                            } 
                                         }
                                     case 1:
                                         x--
@@ -230,6 +233,9 @@ func (c Circuit) Simulate(path string) {
                                                 seekInput(x, y, 3)
                                                 seekInput(x, y, direction)
                                             }
+                                            if rawc[x][y] == "-" && rawc[x - 1][y] == "|" {
+                                                seekInput(x, y, direction)
+                                            } 
                                         }
                                     case 2:
                                         y++
@@ -248,6 +254,9 @@ func (c Circuit) Simulate(path string) {
                                                 seekInput(x, y, 1)
                                                 seekInput(x, y, direction)
                                             }
+                                            if rawc[x][y] == "|" && rawc[x][y + 1] == "-" {
+                                                seekInput(x, y, direction)
+                                            } 
                                         }
                                     case 3:
                                         y--
@@ -266,6 +275,9 @@ func (c Circuit) Simulate(path string) {
                                                 seekInput(x, y, 1)
                                                 seekInput(x, y, direction)
                                             }
+                                            if rawc[x][y] == "|" && rawc[x][y - 1] == "-" {
+                                                seekInput(x, y, direction)
+                                            } 
                                         }
                                 }}
                             seekInput(cX, cY, direction)
