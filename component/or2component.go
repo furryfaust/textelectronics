@@ -75,9 +75,3 @@ func (o Or2Component) InputStreams() []string {
 func (o Or2Component) OutputStreams() []string {
     return []string {"O"}
 }
-
-
-
-
-
-

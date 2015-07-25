@@ -17,6 +17,6 @@ func main() {
     circuit.AddRecognizer(component.NewXor2Recognizer())
     circuit.AddRecognizer(component.NewClockRecognizer())
     circuit.AddRecognizer(component.NewFlipFlopRecognizer())
-    
+
     circuit.Simulate(os.Args[1])
 }

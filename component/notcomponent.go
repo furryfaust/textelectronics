@@ -65,8 +65,3 @@ func (n NotComponent) InputStreams() []string {
 func (n NotComponent) OutputStreams() []string {
     return []string {"O"}
 }
-
-
-
-
-
