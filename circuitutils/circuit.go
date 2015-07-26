@@ -322,7 +322,7 @@ func (c Circuit) Simulate(path string) {
         for index := range *c.Components {
             (*c.Components)[index].Update()
         }
-        
+
         fmt.Println("----------")
         for _, component := range *c.Components {
             component.Print()

@@ -9,4 +9,9 @@ type Component interface {
     Output(string) *int
     InputStreams() []string
     OutputStreams() []string
+    Visual() map[Coordinate]*int
+}
+
+type Coordinate struct {
+    X, Y int
 }
