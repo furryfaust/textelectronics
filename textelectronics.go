@@ -1,9 +1,9 @@
 package main
 
-import (    
-    "os"
-    "github.com/furryfaust/textelectronics/component"
+import (
     "github.com/furryfaust/textelectronics/circuitutils"
+    "github.com/furryfaust/textelectronics/component"
+    "os"
 )
 
 func main() {
