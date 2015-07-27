@@ -27,6 +27,7 @@ type HexaconvComponent struct {
     id string
     X, Y, Width, Height int
     InA, InB, InC, InD *int
+    Out *int
 }
 
 func (h HexaconvComponent) Id() string {
@@ -37,4 +38,34 @@ func (h HexaconvComponent) Space() (int, int, int, int) {
     return h.X, h.Y, h.Width, h.Height
 }
 
+func (h HexaconvComponent) Update() {
+}
 
+func (h HexaconvComponent) Print() {
+    fmt.Println("Hexaconv ID:", h.id, "InA:", *h.InA, "InB:", *h.InB, "InC:", *h.InC, "InD:", *h.InD)
+}
+
+func (h *HexaconvComponent) Connect(c *int, t string) {
+    if t == "A" {
+       h.InA = c
+    } else if t == "B" {
+        h.InB = c
+    } else if t == "C" {
+        h.InC = c
+    } else if t == "D" {
+        h.InD = c
+    }
+}
+
+func (h HexaconvComponent) Output(t string) *int {
+    return nil
+}
+
+func (h HexaconvComponent) InputStreams() []string {
+    return string[] {"A", "B", "C", "D"}
+}
+
+func (h HexaconvComponent) OutputStreams() []string {
+    return string[] {}
+}
+ 

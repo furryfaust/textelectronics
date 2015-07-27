@@ -61,3 +61,7 @@ func (p ProbeComponent) InputStreams() []string {
 func (p ProbeComponent) OutputStreams() []string {
     return []string {"O"}
 }
+
+func (p ProbeComponent) Visual() map[Coordinate]*int {
+    return nil
+}

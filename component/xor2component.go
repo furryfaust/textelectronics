@@ -76,3 +76,6 @@ func (x Xor2Component) OutputStreams() []string {
     return []string {"O"}
 }
 
+func (x Xor2Component) Visual() map[Coordinate]*int {
+    return nil
+}

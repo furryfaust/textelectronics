@@ -65,3 +65,8 @@ func (n NotComponent) InputStreams() []string {
 func (n NotComponent) OutputStreams() []string {
     return []string {"O"}
 }
+
+func (n NotComponent) Visual() map[Coordinate]*int {
+    return nil
+} 
+

@@ -63,3 +63,7 @@ func (i InputComponent) InputStreams() []string {
 func (i InputComponent) OutputStreams() []string {
     return []string {"O"}
 }
+
+func (i InputComponent) Visual() map[Coordinate]*int {
+    return nil
+}
