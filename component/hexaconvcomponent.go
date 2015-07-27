@@ -27,7 +27,6 @@ type HexaconvComponent struct {
     id string
     X, Y, Width, Height int
     InA, InB, InC, InD *int
-    Out *int
 }
 
 func (h HexaconvComponent) Id() string {
