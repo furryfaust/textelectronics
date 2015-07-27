@@ -61,10 +61,10 @@ func (h HexaconvComponent) Output(t string) *int {
 }
 
 func (h HexaconvComponent) InputStreams() []string {
-    return string[] {"A", "B", "C", "D"}
+    return []string {"A", "B", "C", "D"}
 }
 
 func (h HexaconvComponent) OutputStreams() []string {
-    return string[] {}
+    return []string {}
 }
  
