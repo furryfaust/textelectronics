@@ -9,7 +9,7 @@ type Component interface {
     Output(string) *int
     InputStreams() []string
     OutputStreams() []string
-    Visual() map[Coordinate]*int
+    Visual() map[Coordinate]*string
 }
 
 type Coordinate struct {

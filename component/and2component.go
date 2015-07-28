@@ -76,6 +76,6 @@ func (a And2Component) OutputStreams() []string {
     return []string {"O"}
 }
 
-func (a And2Component) Visual() map[Coordinate]*int {
+func (a And2Component) Visual() map[Coordinate]*string {
     return nil
 }

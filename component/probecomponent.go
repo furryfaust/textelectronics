@@ -39,7 +39,7 @@ func (p ProbeComponent) Space() (int, int, int, int) {
 }
 
 func (p ProbeComponent) Update() {
-    *p.Out = *p.In    
+    *p.Out = *p.In
 }
 
 func (p ProbeComponent) Print() {
@@ -62,6 +62,6 @@ func (p ProbeComponent) OutputStreams() []string {
     return []string {"O"}
 }
 
-func (p ProbeComponent) Visual() map[Coordinate]*int {
+func (p ProbeComponent) Visual() map[Coordinate]*string {
     return nil
 }

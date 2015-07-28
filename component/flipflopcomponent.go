@@ -87,7 +87,7 @@ func (f FlipFlopComponent) OutputStreams() []string {
     return []string {"O", "Q"}
 }
 
-func (f FlipFlopComponent) Visual() map[Coordinate]*int {
+func (f FlipFlopComponent) Visual() map[Coordinate]*string {
     return nil
 }
 

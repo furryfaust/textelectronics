@@ -83,6 +83,6 @@ func (c ClockComponent) OutputStreams() []string {
     return []string {"O"}
 }
 
-func (c ClockComponent) Visual() map[Coordinate]*int {
+func (c ClockComponent) Visual() map[Coordinate]*string {
     return nil
 }

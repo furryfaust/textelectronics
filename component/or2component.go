@@ -76,6 +76,6 @@ func (o Or2Component) OutputStreams() []string {
     return []string {"O"}
 }
 
-func (o Or2Component) Visual() map[Coordinate]*int {
+func (o Or2Component) Visual() map[Coordinate]*string {
     return nil
 }
