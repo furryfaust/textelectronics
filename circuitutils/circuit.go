@@ -203,8 +203,10 @@ func (c Circuit) Simulate(path string) {
                                             if rawc[x][y] == "%" {
                                                 fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                                fcom := getComponentById(fid)
-                                                fcom.Connect(mcom.Output(mio), fio)
+                                                if fid != "" {
+                                                    fcom := getComponentById(fid)
+                                                    fcom.Connect(mcom.Output(mio), fio)
+                                                }
                                             }
                                             if rawc[x][y] == "+" {
                                                 seekInput(x, y, 2)
@@ -224,8 +226,10 @@ func (c Circuit) Simulate(path string) {
                                             if rawc[x][y] == "%" {
                                                 fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                                fcom := getComponentById(fid)
-                                                fcom.Connect(mcom.Output(mio), fio)
+                                                if  fid != "" {
+                                                    fcom := getComponentById(fid)
+                                                    fcom.Connect(mcom.Output(mio), fio)
+                                                }
                                             }
                                             if rawc[x][y] == "+" {
                                                 seekInput(x, y, 2)
@@ -245,8 +249,10 @@ func (c Circuit) Simulate(path string) {
                                             if rawc[x][y] == "%" {
                                                 fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                                fcom := getComponentById(fid)
-                                                fcom.Connect(mcom.Output(mio), fio)
+                                                if fid != "" {
+                                                    fcom := getComponentById(fid)
+                                                    fcom.Connect(mcom.Output(mio), fio)
+                                                }
                                             }
                                             if rawc[x][y] == "+" {
                                                 seekInput(x, y, 0)
@@ -266,8 +272,10 @@ func (c Circuit) Simulate(path string) {
                                             if rawc[x][y] == "%" {
                                                 fio, fid, _, _, _ := recognizeIOType(x, y)
 
-                                                fcom := getComponentById(fid)
-                                                fcom.Connect(mcom.Output(mio), fio)
+                                                if fid != "" {
+                                                    fcom := getComponentById(fid)
+                                                    fcom.Connect(mcom.Output(mio), fio)
+                                                }
                                             }
                                             if rawc[x][y] == "+" {
                                                 seekInput(x, y, 0)

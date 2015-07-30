@@ -49,7 +49,7 @@ func (h HexaconvComponent) Space() (int, int, int, int) {
 
 func (h HexaconvComponent) Update() {
     sum := 0
-    out := h.visual[Coordinate {X: 3, Y:3}]
+    out := h.visual[Coordinate {X: 2, Y:2}]
     if *h.InA == 1 {
         sum += 1
     }
