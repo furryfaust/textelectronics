@@ -1,6 +1,9 @@
 package component
 
-import "fmt"
+import (
+    "fmt"
+    "strconv"
+)
 
 type HexaconvRecognizer struct {
     blueprint [][]string
@@ -11,6 +14,11 @@ func (h HexaconvRecognizer) Blueprint() [][]string {
 }
 
 func (h HexaconvRecognizer) NewComponent(id string, x int, y int, input map[string]string) Component {
+    ina, inb, inc, ind, out := 0, 0, 0, 0, "0"
+    visual := map[Coordinate]*string { Coordinate { X:3, Y:3 }:&out }
+    width, height := len(h.blueprint) - 1, len(h.blueprint[0]) - 1
+    hexaconvcom := HexaconvComponent {id:id, X:x, Y:y, Width:width, Height:height, InA:&ina, InB:&inb, InC:&inc, InD:&ind, visual:visual}
+    return &hexaconvcom
 }
 
 func NewHexaconvRecognizer() HexaconvRecognizer {
@@ -27,6 +35,8 @@ type HexaconvComponent struct {
     id string
     X, Y, Width, Height int
     InA, InB, InC, InD *int
+    Out *string
+    visual map[Coordinate]*string
 }
 
 func (h HexaconvComponent) Id() string {
@@ -38,6 +48,37 @@ func (h HexaconvComponent) Space() (int, int, int, int) {
 }
 
 func (h HexaconvComponent) Update() {
+    sum := 0
+    out := h.visual[Coordinate {X: 3, Y:3}]
+    if *h.InA == 1 {
+        sum += 1
+    }
+    if *h.InB == 1 {
+        sum += 2
+    }
+    if *h.InC == 1 {
+        sum += 4
+    }
+    if *h.InD == 1 {
+        sum += 8
+    }
+    if sum < 10 {
+       *out = strconv.Itoa(sum)
+    } else {
+        if sum == 10 {
+            *out = "A"
+        } else if sum == 11 {
+            *out = "B"
+        } else if sum == 12 {
+            *out = "C"
+        } else if sum == 13 {
+            *out = "D"
+        } else if sum == 14 {
+            *out = "E"
+        } else if sum == 15 {
+            *out = "F"
+        }
+    }
 }
 
 func (h HexaconvComponent) Print() {
@@ -67,4 +108,7 @@ func (h HexaconvComponent) InputStreams() []string {
 func (h HexaconvComponent) OutputStreams() []string {
     return []string {}
 }
- 
+
+func (h HexaconvComponent) Visual() map[Coordinate]*string {
+    return h.visual
+}
