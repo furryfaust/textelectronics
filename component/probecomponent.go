@@ -1,6 +1,9 @@
 package component
 
-import "fmt"
+import (
+    "fmt"
+    "strconv"
+)
 
 type ProbeRecognizer struct {
     blueprint [][]string
@@ -11,9 +14,10 @@ func (p ProbeRecognizer) Blueprint() [][]string {
 }
 
 func (p ProbeRecognizer) NewComponent(id string, x int, y int, input map[string]string) Component {
-    in, out := 0, 0
+    in, out, vout := 0, 0, "0"
     width, height := len(p.blueprint) - 1, len(p.blueprint[0]) - 1
-    probecom := ProbeComponent {id:id, X:x, Y:y, Width:width, Height:height, In:&in, Out:&out}
+    visual := map[Coordinate]*string { Coordinate {X:0, Y:1}:&vout } 
+    probecom := ProbeComponent {id:id, X:x, Y:y, Width:width, Height:height, In:&in, Out:&out, visual:visual}
     return &probecom
 }
 
@@ -28,6 +32,7 @@ type ProbeComponent struct {
     X, Y, Width, Height int
     In *int
     Out *int
+    visual map[Coordinate]*string
 }
 
 func (p ProbeComponent) Id() string {
@@ -40,6 +45,7 @@ func (p ProbeComponent) Space() (int, int, int, int) {
 
 func (p ProbeComponent) Update() {
     *p.Out = *p.In
+    *p.visual[Coordinate {X:0, Y:1}] = strconv.Itoa(*p.Out) 
 }
 
 func (p ProbeComponent) Print() {
@@ -63,5 +69,5 @@ func (p ProbeComponent) OutputStreams() []string {
 }
 
 func (p ProbeComponent) Visual() map[Coordinate]*string {
-    return nil
+    return p.visual
 }
