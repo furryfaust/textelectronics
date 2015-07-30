@@ -18,7 +18,7 @@ func (n NotRecognizer) NewComponent(id string, x int, y int, input map[string]st
 }
 
 func NewNotRecognizer() NotRecognizer {
-    blueprint := [][]string {{"!", ".", "!", ""}}
+    blueprint := [][]string {{"!", ".", "!"}}
     notrec := NotRecognizer {blueprint:blueprint}
     return notrec
 }
