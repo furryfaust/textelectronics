@@ -296,14 +296,10 @@ func (c Circuit) Simulate(path string) {
     copy := rawc
     printICircuit := func() {
         for _, component := range components {
-            if reflect.TypeOf(component).Elem().Name() == "ProbeComponent" {
-                x, y, _, _ := component.Space()
-                val := *component.Output("O")
-                if val == 0 {
-                    copy[x][y + 1] = "0"
-                } else {
-                    copy[x][y + 1] = "1"
-                }
+            x, y, _, _ := component.Space()
+            for coord, out := components.Visual() {
+                cx, cy := coord.X, coord.Y
+               copy[x + cx][y + cy] = *out
             }
         }
 
