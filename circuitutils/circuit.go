@@ -6,7 +6,6 @@ import (
     "time"
     "bufio"
     "strconv"
-    "reflect"
     "regexp"
     "strings"
     "io/ioutil"
@@ -297,7 +296,7 @@ func (c Circuit) Simulate(path string) {
     printICircuit := func() {
         for _, component := range components {
             x, y, _, _ := component.Space()
-            for coord, out := components.Visual() {
+            for coord, out := range component.Visual() {
                 cx, cy := coord.X, coord.Y
                copy[x + cx][y + cy] = *out
             }
