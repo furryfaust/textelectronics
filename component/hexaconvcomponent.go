@@ -15,7 +15,7 @@ func (h HexaconvRecognizer) Blueprint() [][]string {
 
 func (h HexaconvRecognizer) NewComponent(id string, x int, y int, input map[string]string) Component {
     ina, inb, inc, ind, out := 0, 0, 0, 0, "0"
-    visual := map[Coordinate]*string { Coordinate { X:3, Y:3 }:&out }
+    visual := map[Coordinate]*string { Coordinate { X:2, Y:2 }:&out }
     width, height := len(h.blueprint) - 1, len(h.blueprint[0]) - 1
     hexaconvcom := HexaconvComponent {id:id, X:x, Y:y, Width:width, Height:height, InA:&ina, InB:&inb, InC:&inc, InD:&ind, visual:visual}
     return &hexaconvcom
