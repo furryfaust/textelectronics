@@ -9,24 +9,23 @@ import (
     "regexp"
     "strings"
     "io/ioutil"
-    "github.com/furryfaust/textelectronics/component"
 )
 
 type Circuit struct {
-    Recognizers *[]component.Recognizer
-    Components *[]component.Component
+    Recognizers *[]Recognizer
+    Components *[]Component
 }
 
 func NewCircuit() Circuit {
     circuit := Circuit {}
-    recognizers := make([]component.Recognizer, 0)
+    recognizers := make([]Recognizer, 0)
     circuit.Recognizers = &recognizers
-    components := make([]component.Component, 0)
+    components := make([]Component, 0)
     circuit.Components = &components
     return circuit
 }
 
-func (c Circuit) AddRecognizer(recognizer component.Recognizer) {
+func (c Circuit) AddRecognizer(recognizer Recognizer) {
     recognizers := *c.Recognizers
     *c.Recognizers = append(recognizers, recognizer)
 }
@@ -119,7 +118,7 @@ func (c Circuit) Simulate(path string) {
         }
     }
     
-    getComponentById := func(id string) component.Component {
+    getComponentById := func(id string) Component {
         for i := range components {
             if components[i].Id() == id {
                 return components[i]
@@ -128,7 +127,7 @@ func (c Circuit) Simulate(path string) {
         return nil
     }
 
-    getComponentByLocation := func(x int, y int) component.Component {
+    getComponentByLocation := func(x int, y int) Component {
         for i := range components {
             cX, cY, cWidth, cHeight := components[i].Space()
             if x >= cX && x <= cX + cWidth && y >= cY && y <= cY + cHeight {
