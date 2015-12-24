@@ -1,4 +1,4 @@
-package textelectronics
+package components
 
 import (
     "fmt"
@@ -23,7 +23,7 @@ func (c ClockRecognizer) NewComponent(id string, x int, y int, input map[string]
     width, height := len(c.blueprint) - 1, len(c.blueprint[0]) - 1
     clockcom := ClockComponent {id:id, X:x, Y:y, Width:width, Height:height, Tick:tick, Interval:interval, In:&in, Out:&out}
     return &clockcom
-}  
+}
 
 func NewClockRecognizer() ClockRecognizer {
     blueprint := [][]string {{" ", "*", " "},

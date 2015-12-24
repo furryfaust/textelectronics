@@ -1,4 +1,4 @@
-package textelectronics
+package components
 
 type Component interface {
     Id() string

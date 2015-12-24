@@ -1,4 +1,4 @@
-package textelectronics
+package components
 
 type Recognizer interface {
     Blueprint() [][]string
