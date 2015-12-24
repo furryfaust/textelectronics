@@ -60,7 +60,7 @@ func (c *Circuit) prepare(path string) {
     dat, _ := ioutil.ReadFile(path)
     lines := strings.Split(string(dat), "\n")
 
-    width := getLongestInSlice(lines)
+    width := getLongestInSlice(lines) + 1
 
     c.circuit = [][]string {}
     c.circuit = append(c.circuit, make([]string, width))
@@ -218,7 +218,6 @@ func (c *Circuit) connect(mcom components.Component, mio string, x int, y int, d
             if fid != "" {
                 fcom := c.getComponentById(fid)
                 fcom.Connect(mcom.Output(mio), fio)
-                log.Println(fid, fio, "is connected to", mcom.Id(), mio)
             }
         }
 
@@ -249,7 +248,6 @@ func (c *Circuit) connect(mcom components.Component, mio string, x int, y int, d
             if fid != "" {
                 fcom := c.getComponentById(fid)
                 fcom.Connect(mcom.Output(mio), fio)
-                log.Println(fid, fio, "is connected to", mcom.Id(), mio)
             }
         }
 
@@ -280,7 +278,6 @@ func (c *Circuit) connect(mcom components.Component, mio string, x int, y int, d
             if fid != "" {
                 fcom := c.getComponentById(fid)
                 fcom.Connect(mcom.Output(mio), fio)
-                log.Println(fid, fio, "is connected to", mcom.Id(), mio)
             }
         }
 
@@ -311,7 +308,6 @@ func (c *Circuit) connect(mcom components.Component, mio string, x int, y int, d
             if fid != "" {
                 fcom := c.getComponentById(fid)
                 fcom.Connect(mcom.Output(mio), fio)
-                log.Println(fid, fio, "is connected to", mcom.Id(), mio)
             }
         }
 
