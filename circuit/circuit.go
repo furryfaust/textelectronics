@@ -29,27 +29,22 @@ var (
 )
 
 type Circuit struct {
-    Recognizers []components.Recognizer
     Components []components.Component
-
     circuit [][]string
+
+    options Options
 }
 
-func NewCircuit() *Circuit {
+func NewCircuit(o Options) *Circuit {
     circuit := &Circuit {}
-    recognizers := make([]components.Recognizer, 0)
-    circuit.Recognizers = recognizers
-    components := make([]components.Component, 0)
-    circuit.Components = components
+    circuit.options = o
+    circuit.Components = make([]components.Component, 0)
     return circuit
 }
 
-func (c *Circuit) AddRecognizer(recognizer components.Recognizer) {
-    c.Recognizers = append(c.Recognizers, recognizer)
-}
 
-func (c *Circuit) Run(path string) {
-    c.prepare(path)
+func (c *Circuit) Run() {
+    c.prepare(c.options.Path)
     c.parse()
     c.assemble()
 
@@ -84,16 +79,11 @@ func getLongestInSlice(slice []string) (longest int) {
 
 func (c *Circuit) parse() {
     circuit := c.circuit
-    values := map[string]string {}
-    /*
-    for i := 2; i != len(os.Args) ; i++ {
-        pair := strings.Split(os.Args[i], ":")
-        values[pair[0]] = pair[1]
-    }*/
+    values := c.options.Values
 
     for y := 0; y != len(circuit[0]); y++ {
         for x := 0; x != len(circuit); x++ {
-            for _, rec := range c.Recognizers {
+            for _, rec := range c.options.Recognizers {
                 if found, id := c.recognizeComponent(x, y, rec.Blueprint()); found && id != "" {
                     com := rec.NewComponent(id, x, y, values)
                     c.Components = append(c.Components, com)
